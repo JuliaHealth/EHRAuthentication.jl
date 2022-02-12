@@ -3,6 +3,9 @@ uuid = "45047142-e73a-4b31-ae20-3729a1bbef33"
 authors = ["Dilum Aluthge", "Pumas-AI, Inc.", "contributors"]
 version = "1.0.0-DEV"
 
+[deps]
+HTTP = "cd3eb016-35fb-5094-929b-558a96fad6f3"
+
 [compat]
 julia = "1.6"
 
