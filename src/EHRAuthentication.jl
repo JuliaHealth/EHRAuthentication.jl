@@ -1,5 +1,5 @@
 module EHRAuthentication
 
-include("Cerner.jl")
+include("Cerner/Cerner.jl")
 
 end # module
