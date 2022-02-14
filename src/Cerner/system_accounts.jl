@@ -1,4 +1,4 @@
-function authenticate_fhir_cerner()
+function authenticate_fhir_cerner(METADATA_URL, SYSTEM_ACCOUNT_CLIENT_ID, SYSTEM_ACCOUNT_CLIENT_SECRET)
     response = HTTP.request("GET", METADATA_URL*"?", ["Accept" => "application/json"])
     response_body = JSON3.read(String(response.body))
     ENDPOINT_LIST = response_body.rest[1].security.extension[1].extension
