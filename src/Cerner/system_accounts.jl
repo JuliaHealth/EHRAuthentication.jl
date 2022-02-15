@@ -17,7 +17,7 @@ function authenticate_fhir_cerner(METADATA_URL, SYSTEM_ACCOUNT_CLIENT_ID, SYSTEM
     base64encoded_client_id_secret = Base64.base64encode(SYSTEM_ACCOUNT_CLIENT_ID*":"*SYSTEM_ACCOUNT_CLIENT_SECRET)
     HTTP.request("POST"
         , TOKEN_ENDPOINT
-        , ["Accept" => "application/json", "Authorization: Basic $base64encoded_client_id_secret", "Content-Type" => "application/x-www-form-urlencoded", "cache-control" => "no-cache"]
+        , ["Accept" => "application/json", "Authorization" => "Basic $base64encoded_client_id_secret", "Content-Type" => "application/x-www-form-urlencoded", "cache-control" => "no-cache"]
         , "grant_type=client_credentials&scope=system%2FObservation.read%20system%2FPatient.read"
     )
 end
