@@ -1,4 +1,3 @@
 @testset "Cerner" begin
-    # TODO: delete this example test
-    EHRAuthentication.Cerner.authenticate_fhir_cerner()
+    # TODO: figure out how to test this
 end
