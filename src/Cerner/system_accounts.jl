@@ -1,7 +1,8 @@
 Base.@kwdef struct CernerConfig
     base_url::String
+    grant_type::String = "client_credentials"
     headers::Dict{String, String} = Dict{String, String}()
-    scope::String = "grant_type=client_credentials&scope=system%2FObservation.read%20system%2FPatient.read"
+    scope::String # Example: scope = "system/Patient.read system/Observation.read"
     system_account_client_id::String
     system_account_client_secret::String
 end
@@ -14,6 +15,7 @@ end
 
 function authenticate_fhir_cerner(config::CernerConfig)
     base_url                     = config.base_url
+    grant_type                   = config.grant_type
     headers                      = config.headers
     scope                        = config.scope
     system_account_client_id     = config.system_account_client_id
@@ -54,10 +56,14 @@ function authenticate_fhir_cerner(config::CernerConfig)
     for (k, v) in headers
         current_headers[k] = v
     end
+    body = string(
+        "grant_type=$(HTTP.escapeuri(grant_type))&",
+        "scope=$(HTTP.escapeuri(scope))&",
+    )
     token_response = HTTP.request("POST",
         endpoints["token"],
         current_headers,
-        scope,
+        body,
     )
     token_response_body = JSON3.read(String(token_response.body))
     token_dict = copy(token_response_body)
